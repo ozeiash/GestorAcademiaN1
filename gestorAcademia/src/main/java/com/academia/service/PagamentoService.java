@@ -56,4 +56,5 @@ public class PagamentoService {
 		dto.setFormaPagamento(pg.getFormaPagamento().name());
 		return dto;
 	}
+	
 }
