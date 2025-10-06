@@ -120,5 +120,5 @@ A exclusão de um treino que não está associado a alunos (DELETE /api/v1/trein
 
 ### 16. Tentativa de Remoção de Treino Associado (Erro de Regra de Negócio)
 
-Este é um teste crucial que retorna um erro HTTP (ex: 500 Bad Request ou 409 Conflict) ao tentar remover um treino que possui vínculos ativos, validando a regra: "Não deve ser possível remover treinos que ainda estejam associados a alunos."
-![Proteger Treino com Vinculo](screenshots/ErroDeletarTreincoComVinculo.png)
+Este é um teste crucial que retorna um erro HTTP (ex: 400 Bad Request ou 409 Conflict) ao tentar remover um treino que possui vínculos ativos, validando a regra: "Não deve ser possível remover treinos que ainda estejam associados a alunos."
+![Proteger Treino com Vinculo](screenshots/ErroExcluirTreinoVinculado.png)
