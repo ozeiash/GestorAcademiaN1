@@ -108,3 +108,7 @@ A exclusão de um treino que não está associado a alunos (DELETE /api/v1/trein
 ### 16. Tentativa de Remoção de Treino Associado (Erro de Regra de Negócio)
 Este é um teste crucial que retorna um erro HTTP (ex: 400 Bad Request) ao tentar remover um treino que possui vínculos ativos, validando a regra: "Não deve ser possível remover treinos que ainda estejam associados a alunos."
 ![Erro Treino Associado](https://github.com/ozeiash/GestorAcademiaN1/blob/main/ErroExcluirTreinoVinculado.png)
+
+### 17. Tentativa de Remoção de Treino Associado (Erro de Regra de Negócio)
+Este é um teste que retorna um erro HTTP (ex: 400 Bad Request) ao tentar adicionar CPF duplicado, validando a regra: "Não deve ser possível adicionar CPF duplicado."
+![Erro Treino Associado](https://github.com/ozeiash/GestorAcademiaN1/blob/main/ErroCPFDuplicado.png)
