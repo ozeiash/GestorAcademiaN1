@@ -76,7 +76,6 @@ public class AlunoTreinoVinculo {
 			this.treinoId = treinoId;
 		}
 
-		// equals() e hashCode() também são obrigatórios para chave composta!
 		@Override
 		public boolean equals(Object o) {
 			if (this == o)

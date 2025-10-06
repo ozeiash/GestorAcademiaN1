@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.academia.exception.RecursoNaoEncontradoException;
+import com.academia.exception.RegraDeNegocioException;
 import com.academia.model.Aluno;
 import com.academia.model.AlunoTreinoVinculo;
 import com.academia.model.Treino;
@@ -16,7 +18,7 @@ import jakarta.transaction.Transactional;
 
 @Service
 public class AlunoTreinoVinculoService {
-	
+
 	@Autowired
 	private AlunoRepository alunoRepository;
 	@Autowired
@@ -26,16 +28,18 @@ public class AlunoTreinoVinculoService {
 
 	@Transactional
 	public void vincularAlunoTreino(Long alunoId, Long treinoId) {
-		Aluno aluno = alunoRepository.findById(alunoId).orElseThrow(() -> new RuntimeException("Aluno não encontrado"));
+		Aluno aluno = alunoRepository.findById(alunoId)
+				.orElseThrow(() -> new RecursoNaoEncontradoException("Aluno não encontrado com ID: " + alunoId));
 		Treino treino = treinoRepository.findById(treinoId)
-				.orElseThrow(() -> new RuntimeException("Treino não encontrado"));
+				.orElseThrow(() -> new RecursoNaoEncontradoException("Treino não encontrado com ID: " + treinoId));
 
 		AlunoTreinoVinculo.AlunoTreinoKey key = new AlunoTreinoVinculo.AlunoTreinoKey();
 		key.setAlunoId(alunoId);
 		key.setTreinoId(treinoId);
 
 		if (vinculoRepository.existsById(key)) {
-			throw new RuntimeException("Vínculo já existe");
+
+			throw new RegraDeNegocioException("O aluno já está vinculado a este treino.");
 		}
 
 		AlunoTreinoVinculo vinculo = new AlunoTreinoVinculo();
@@ -45,6 +49,4 @@ public class AlunoTreinoVinculoService {
 		vinculo.setDataAssociacao(LocalDateTime.now());
 		vinculoRepository.save(vinculo);
 	}
-	
-	
 }

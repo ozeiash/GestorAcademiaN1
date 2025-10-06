@@ -22,7 +22,7 @@ public class PagamentoService {
 	@Transactional
 	public PagamentoDTO registrar(PagamentoDTO dto) {
 		Aluno aluno = alunoRepository.findById(dto.getAlunoId())
-				.orElseThrow(() -> new RuntimeException("Aluno não encontrado"));
+				.orElseThrow(() -> new RuntimeException("Aluno não encontrado" + dto.getAlunoId()));
 		Pagamento pagamento = new Pagamento();
 		pagamento.setAluno(aluno);
 		pagamento.setValorPago(dto.getValorPago());

@@ -1,6 +1,8 @@
 package com.academia.service;
 
 import com.academia.dto.TreinoDTO;
+import com.academia.exception.RecursoNaoEncontradoException; // IMPORTADO
+import com.academia.exception.RegraDeNegocioException; // IMPORTADO
 import com.academia.model.Treino;
 import com.academia.repository.TreinoRepository;
 import com.academia.repository.AlunoTreinoVinculoRepository;
@@ -12,6 +14,7 @@ import java.util.Optional;
 
 @Service
 public class TreinoService {
+
 	@Autowired
 	private TreinoRepository treinoRepository;
 	@Autowired
@@ -35,7 +38,9 @@ public class TreinoService {
 
 	@Transactional
 	public TreinoDTO atualizar(Long id, TreinoDTO dto) {
-		Treino treino = treinoRepository.findById(id).orElseThrow(() -> new RuntimeException("Treino não encontrado"));
+		Treino treino = treinoRepository.findById(id)
+
+				.orElseThrow(() -> new RecursoNaoEncontradoException("Treino não encontrado com ID: " + id));
 		treino.setNome(dto.getNome());
 		treino.setDescricao(dto.getDescricao());
 		treino.setNivel(Treino.Nivel.valueOf(dto.getNivel()));
@@ -45,9 +50,16 @@ public class TreinoService {
 
 	@Transactional
 	public void remover(Long id) {
+
 		if (!alunoTreinoVinculoRepository.findByTreinoId(id).isEmpty()) {
-			throw new RuntimeException("Erro: Não pode remover. Treino está associado a alunos.");
+			throw new RegraDeNegocioException(
+					"Não é possível remover. Este treino ainda está associado a um ou mais alunos.");
 		}
+
+		if (!treinoRepository.existsById(id)) {
+			throw new RecursoNaoEncontradoException("Treino não encontrado com ID: " + id);
+		}
+
 		treinoRepository.deleteById(id);
 	}
 
