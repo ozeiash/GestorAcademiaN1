@@ -99,7 +99,7 @@ A inativação (PATCH /api/v1/alunos/{id}/inativar) confirma a alteração do st
 
 ### 14. Remoção de Plano (204 No Content)
 A exclusão de um plano sem vínculos (DELETE /api/v1/planos/{id}) retorna o código 204 No Content, indicando sucesso na remoção.
-![Deletar Plano 204](screenshots/DELETEPlano.png)
+![Deletar Plano 204](GestorAcademiaN1/DELETEPlano.png)
 
 ### 15. Remoção de Treino sem Vínculos (204 No Content)
 A exclusão de um treino que não está associado a alunos (DELETE /api/v1/treinos/{id}) retorna o código 204 No Content.
