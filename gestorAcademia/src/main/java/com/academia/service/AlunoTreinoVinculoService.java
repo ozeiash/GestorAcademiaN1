@@ -49,4 +49,5 @@ public class AlunoTreinoVinculoService {
 		vinculo.setDataAssociacao(LocalDateTime.now());
 		vinculoRepository.save(vinculo);
 	}
+	
 }
